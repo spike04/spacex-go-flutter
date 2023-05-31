@@ -1,7 +1,6 @@
+import 'package:cherry/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-
-import '../utils/index.dart';
 
 enum ThemeState { light, dark, black, system }
 

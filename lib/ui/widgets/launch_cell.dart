@@ -1,10 +1,9 @@
+import 'package:cherry/models/index.dart';
+import 'package:cherry/ui/views/launches/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:row_collection/row_collection.dart';
-
-import '../../models/index.dart';
-import '../views/launches/index.dart';
-import 'index.dart';
 
 class LaunchCell extends StatelessWidget {
   final Launch launch;
@@ -26,6 +25,6 @@ class LaunchCell extends StatelessWidget {
         ),
       ),
       Separator.divider(indent: 72)
-    ]);
+    ],);
   }
 }

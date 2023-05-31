@@ -1,12 +1,11 @@
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:row_collection/row_collection.dart';
-import 'package:system_setting/system_setting.dart';
-
-import '../../../cubits/index.dart';
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
+import 'package:system_settings/system_settings.dart';
 
 /// Here lays all available options for the user to configurate.
 class SettingsScreen extends StatelessWidget {
@@ -143,7 +142,7 @@ class SettingsScreen extends StatelessWidget {
             icon: Icons.notifications,
             title: context.translate('settings.notifications.title'),
             subtitle: context.translate('settings.notifications.body'),
-            onTap: () => SystemSetting.goto(SettingTarget.NOTIFICATION),
+            onTap: () => SystemSettings.appNotifications(),
           ),
           Separator.divider(indent: 72),
         ],

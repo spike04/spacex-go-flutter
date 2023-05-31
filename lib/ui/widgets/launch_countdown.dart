@@ -1,11 +1,7 @@
-import 'dart:ui';
-
+import 'package:cherry/utils/translate.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:row_collection/row_collection.dart';
-
-import '../../utils/translate.dart';
 
 /// Stateful widget used to display a countdown to the next launch.
 class LaunchCountdown extends StatefulWidget {
@@ -64,21 +60,21 @@ class Countdown extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Duration _launchDateDiff = launchDate.difference(DateTime.now());
+    final Duration launchDateDiff = launchDate.difference(DateTime.now());
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         _countdownChild(
           context: context,
-          title: _launchDateDiff.inDays.toString().padLeft(2, '0'),
+          title: launchDateDiff.inDays.toString().padLeft(2, '0'),
           description: context.translate('spacex.home.tab.counter.day'),
         ),
         Separator.spacer(),
         _countdownChild(
           context: context,
           title: digitsToString(
-            (_launchDateDiff.inHours % 24) ~/ 10,
-            (_launchDateDiff.inHours % 24) % 10,
+            (launchDateDiff.inHours % 24) ~/ 10,
+            (launchDateDiff.inHours % 24) % 10,
           ),
           description: context.translate('spacex.home.tab.counter.hour'),
         ),
@@ -86,8 +82,8 @@ class Countdown extends AnimatedWidget {
         _countdownChild(
           context: context,
           title: digitsToString(
-            (_launchDateDiff.inMinutes % 60) ~/ 10,
-            (_launchDateDiff.inMinutes % 60) % 10,
+            (launchDateDiff.inMinutes % 60) ~/ 10,
+            (launchDateDiff.inMinutes % 60) % 10,
           ),
           description: context.translate('spacex.home.tab.counter.min'),
         ),
@@ -95,8 +91,8 @@ class Countdown extends AnimatedWidget {
         _countdownChild(
           context: context,
           title: digitsToString(
-            (_launchDateDiff.inSeconds % 60) ~/ 10,
-            (_launchDateDiff.inSeconds % 60) % 10,
+            (launchDateDiff.inSeconds % 60) ~/ 10,
+            (launchDateDiff.inSeconds % 60) % 10,
           ),
           description: context.translate('spacex.home.tab.counter.sec'),
         ),

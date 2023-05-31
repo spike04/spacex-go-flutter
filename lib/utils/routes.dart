@@ -1,9 +1,8 @@
+import 'package:cherry/ui/views/general/index.dart';
+import 'package:cherry/ui/views/launches/index.dart';
+import 'package:cherry/ui/views/vehicles/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
 import 'package:flutter/material.dart';
-
-import '../ui/views/general/index.dart';
-import '../ui/views/launches/index.dart';
-import '../ui/views/vehicles/index.dart';
-import '../ui/widgets/index.dart';
 
 /// Class that holds both route names & generate methods.
 /// Used by the Flutter routing system
@@ -16,25 +15,37 @@ class Routes {
       switch (routeSettings.name) {
         case StartScreen.route:
           return MaterialPageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Start Screen',
+            ),
             builder: (_) => StartScreen(),
           );
 
         case AboutScreen.route:
           return MaterialPageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'About Screen',
+            ),
             builder: (_) => AboutScreen(),
           );
 
         case ChangelogScreen.route:
           return MaterialPageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Changelog Screen',
+            ),
             builder: (_) => ChangelogScreen(),
           );
 
         case SettingsScreen.route:
           return MaterialPageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Settings Screen',
+            ),
             builder: (_) => SettingsScreen(),
           );
 
@@ -42,7 +53,10 @@ class Routes {
           final id = args['id'] as String;
 
           return MaterialPageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Launch Screen',
+            ),
             builder: (_) => LaunchPage(id),
           );
 
@@ -51,7 +65,10 @@ class Routes {
           final coreId = args['coreId'] as String;
 
           return ResponsivePageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Core Screen',
+            ),
             builder: (_) => CorePage(
               launchId: launchId,
               coreId: coreId,
@@ -62,7 +79,10 @@ class Routes {
           final launchId = args['launchId'] as String;
 
           return ResponsivePageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Capsule Screen',
+            ),
             builder: (_) => CapsulePage(launchId: launchId),
           );
 
@@ -70,7 +90,10 @@ class Routes {
           final launchId = args['launchId'] as String;
 
           return ResponsivePageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Launchpad Screen',
+            ),
             builder: (_) => LaunchpadPage(launchId: launchId),
           );
 
@@ -79,7 +102,10 @@ class Routes {
           final coreId = args['coreId'] as String;
 
           return ResponsivePageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Landpad Screen',
+            ),
             builder: (_) => LandpadPage(
               launchId: launchId,
               coreId: coreId,
@@ -90,7 +116,10 @@ class Routes {
           final id = args['id'] as String;
 
           return MaterialPageRoute(
-            settings: routeSettings,
+            settings: RouteSettings(
+              arguments: routeSettings.arguments,
+              name: 'Vehicle Screen',
+            ),
             builder: (_) => VehiclePage(vehicleId: id),
           );
 
@@ -105,7 +134,10 @@ class Routes {
   /// Method that calles the error screen when neccesary
   static Route<dynamic> errorRoute(RouteSettings routeSettings) {
     return MaterialPageRoute(
-      settings: routeSettings,
+      settings: RouteSettings(
+        arguments: routeSettings.arguments,
+        name: 'Error Screen',
+      ),
       builder: (_) => ErrorScreen(),
     );
   }

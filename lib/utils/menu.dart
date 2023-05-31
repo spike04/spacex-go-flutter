@@ -1,4 +1,4 @@
-import '../ui/views/general/index.dart';
+import 'package:cherry/ui/views/general/index.dart';
 
 /// Contains all possible popupmenus' strings
 class Menu {

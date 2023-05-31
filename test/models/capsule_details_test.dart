@@ -1,6 +1,6 @@
 import 'package:cherry/models/index.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
 
 import 'mock_context.dart';
 
@@ -90,7 +90,7 @@ void main() {
         CapsuleDetails(launches: const [
           LaunchDetails(),
           LaunchDetails(),
-        ]).getLaunches,
+        ],).getLaunches,
         '2',
       );
     });

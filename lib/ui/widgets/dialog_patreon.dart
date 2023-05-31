@@ -1,8 +1,7 @@
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:row_collection/row_collection.dart';
-
-import '../../utils/index.dart';
 
 /// List of past & current Patreon supporters.
 /// Thanks to you all! :)
@@ -30,15 +29,15 @@ Future<T> showPatreonDialog<T>(BuildContext context) {
           Text(
             context.translate('about.patreon.body_dialog'),
             textAlign: TextAlign.justify,
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
-                  color: Theme.of(context).textTheme.caption.color,
+            style: Theme.of(context).textTheme.titleMedium.copyWith(
+                  color: Theme.of(context).textTheme.bodySmall.color,
                 ),
           ),
           for (String patreon in _patreons)
             Text(
               patreon,
-              style: Theme.of(context).textTheme.subtitle1.copyWith(
-                    color: Theme.of(context).textTheme.caption.color,
+              style: Theme.of(context).textTheme.titleMedium.copyWith(
+                    color: Theme.of(context).textTheme.bodySmall.color,
                   ),
             ),
           if (Theme.of(context).platform != TargetPlatform.iOS)
@@ -47,27 +46,28 @@ Future<T> showPatreonDialog<T>(BuildContext context) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  FlatButton(
+                  TextButton(
                     onPressed: () => Navigator.pop(context, false),
                     child: Text(
                       context.translate('about.patreon.dismiss'),
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
-                            color: Theme.of(context).textTheme.caption.color,
+                      style: Theme.of(context).textTheme.bodyMedium.copyWith(
+                            color: Theme.of(context).textTheme.bodySmall.color,
                           ),
                     ),
                   ),
-                  OutlineButton(
-                    highlightedBorderColor: Theme.of(context).accentColor,
-                    borderSide: BorderSide(
-                      color: Theme.of(context).textTheme.headline6.color,
-                    ),
+                  OutlinedButton(
+                    // highlightedBorderColor:
+                    //     Theme.of(context).colorScheme.secondary,
+                    // borderSide: BorderSide(
+                    //   color: Theme.of(context).textTheme.titleLarge.color,
+                    // ),
                     onPressed: () {
                       Navigator.pop(context, true);
                       context.openUrl(Url.authorPatreon);
                     },
                     child: Text(
                       'PATREON',
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ],

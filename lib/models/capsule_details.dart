@@ -1,9 +1,8 @@
+import 'package:cherry/models/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-
-import '../utils/index.dart';
-import 'index.dart';
 
 // Details about a specific capsule used in a CRS mission
 class CapsuleDetails extends Equatable {

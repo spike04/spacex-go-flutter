@@ -1,11 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:cherry/models/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-
-import '../models/index.dart';
-import '../utils/index.dart';
 
 /// Serves as a way to communicate with the notification system.
 class NotificationsCubit extends HydratedCubit<DateTime> {
@@ -17,8 +18,7 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
     this.service, {
     this.notificationDetails,
     this.initializationSettings,
-  })  : assert(service != null),
-        super(null);
+  }) : super(null);
 
   /// Initializes the notifications system
   Future<void> init() async {
@@ -32,9 +32,7 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
 
   /// Clears previous set notifications if they exist
   void clearPreviousNotifications() {
-    if (state != null) {
-      service.cancelAll();
-    }
+    service.cancelAll();
   }
 
   /// Sets the target launch date to null
@@ -67,7 +65,7 @@ class NotificationsCubit extends HydratedCubit<DateTime> {
     @required Launch nextLaunch,
   }) async {
     try {
-      if (nextLaunch != null && needsToUpdate(nextLaunch.launchDate)) {
+      if (needsToUpdate(nextLaunch.launchDate)) {
         // Cancels all previous schedule notifications because the date has changed
         clearPreviousNotifications();
 

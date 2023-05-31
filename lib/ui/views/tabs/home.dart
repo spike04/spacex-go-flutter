@@ -1,15 +1,14 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/models/index.dart';
+import 'package:cherry/ui/views/launches/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:row_collection/row_collection.dart';
-
-import '../../../cubits/index.dart';
-import '../../../models/index.dart';
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
-import '../launches/index.dart';
 
 /// This tab holds main information about the next launch.
 /// It has a countdown widget.
@@ -62,23 +61,23 @@ class _HeaderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _sliverHeight =
+    final sliverHeight =
         MediaQuery.of(context).size.height * SliverBar.heightRatio;
-    final _isNotLandscape =
+    final isNotLandscape =
         MediaQuery.of(context).orientation != Orientation.landscape;
 
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
         Opacity(
-          opacity: launch.isDateTooTentative && _isNotLandscape ? 1.0 : 0.64,
+          opacity: launch.isDateTooTentative && isNotLandscape ? 1.0 : 0.64,
           child: SwiperHeader(
             list: List.from(SpaceXPhotos.home)..shuffle(),
           ),
         ),
-        if (_isNotLandscape)
+        if (isNotLandscape)
           AnimatedOpacity(
-            opacity: offset > _sliverHeight / 10 ? 0.0 : 1.0,
+            opacity: offset > sliverHeight / 10 ? 0.0 : 1.0,
             duration: Duration(milliseconds: 350),
             child: launch.localLaunchDate.isAfter(DateTime.now()) &&
                     !launch.isDateTooTentative
@@ -175,7 +174,7 @@ class _HomeView extends StatelessWidget {
                   endDate: launch.localLaunchDate.add(
                     Duration(minutes: 30),
                   ),
-                ));
+                ),);
               }
             : null,
       ),
@@ -290,7 +289,7 @@ class _HomeView extends StatelessWidget {
             : null,
       ),
       Separator.divider(indent: 72)
-    ]);
+    ],);
   }
 
   void openCorePage({BuildContext context, String launchId, String coreId}) {

@@ -5,7 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// This widget helps by forcing a size to a cached image,
 /// or anykind of widget, all around the app.
 class ProfileImage extends StatelessWidget {
-  static const smallSize = 40.0, bigSize = 69.0;
+  static const smallSize = 40.0;
+  static const bigSize = 69.0;
 
   final String url;
   final num size;

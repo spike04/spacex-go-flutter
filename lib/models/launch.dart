@@ -1,10 +1,10 @@
+// ignore_for_file: avoid_dynamic_calls
+
+import 'package:cherry/models/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
-
-import '../utils/index.dart';
-import 'index.dart';
 
 /// Details about a specific launch, performed by a Falcon rocket,
 /// including launch & landing pads, rocket & payload information...
@@ -92,6 +92,7 @@ class Launch extends Equatable implements Comparable<Launch> {
     } else if (launchWindow % 3600 == 0) {
       return '${(launchWindow / 3600).truncate()} h';
     } else {
+      // ignore: noop_primitive_operations
       return '${(launchWindow ~/ 3600).truncate()}h ${((launchWindow / 3600 - launchWindow ~/ 3600) * 60).truncate()}min';
     }
   }
@@ -317,10 +318,12 @@ class FailureDetails extends Equatable {
       buffer.write('${NumberFormat.decimalPattern().format(auxTime)} s');
     } else if (auxTime < 3600) {
       buffer.write(
-          '${NumberFormat.decimalPattern().format(auxTime ~/ 60)}min ${NumberFormat.decimalPattern().format(auxTime - (auxTime ~/ 60 * 60))}s');
+        '${NumberFormat.decimalPattern().format(auxTime ~/ 60)}min ${NumberFormat.decimalPattern().format(auxTime - (auxTime ~/ 60 * 60))}s',
+      );
     } else {
       buffer.write(
-          '${NumberFormat.decimalPattern().format(auxTime ~/ 3600)}h ${NumberFormat.decimalPattern().format((auxTime / 3600 - auxTime ~/ 3600) * 60)}min');
+        '${NumberFormat.decimalPattern().format(auxTime ~/ 3600)}h ${NumberFormat.decimalPattern().format((auxTime / 3600 - auxTime ~/ 3600) * 60)}min',
+      );
     }
     return buffer.toString();
   }

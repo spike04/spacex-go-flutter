@@ -1,14 +1,13 @@
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/models/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_request_bloc/flutter_request_bloc.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:row_item/row_item.dart';
-
-import '../../../cubits/index.dart';
-import '../../../models/index.dart';
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
 
 /// This tab holds information about SpaceX-as-a-company,
 /// such as various numbers & achievements.
@@ -47,13 +46,13 @@ class _ComapnyInfoView extends StatelessWidget {
                       Text(
                         value.fullName,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Text(
                         value.getFounderDate(context),
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1.copyWith(
-                              color: Theme.of(context).textTheme.caption.color,
+                        style: Theme.of(context).textTheme.titleMedium.copyWith(
+                              color: Theme.of(context).textTheme.bodySmall.color,
                             ),
                       ),
                     ],

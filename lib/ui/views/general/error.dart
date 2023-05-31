@@ -1,4 +1,4 @@
-import 'package:big_tip/big_tip.dart';
+import 'package:cherry/ui/widgets/big_tip.dart';
 import 'package:flutter/material.dart';
 
 /// Screen that is displayed when the routing system

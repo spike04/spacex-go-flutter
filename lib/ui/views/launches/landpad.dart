@@ -1,13 +1,12 @@
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:row_item/row_item.dart';
-
-import '../../../cubits/index.dart';
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
 
 /// This view displays information about a specific landpad,
 /// where rockets now land.
@@ -44,14 +43,14 @@ class LandpadPage extends StatelessWidget {
                 Text(
                   landpad.fullName,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.status'),
                   landpad.getStatus,
                 ),
                 RowItem.text(context.translate('spacex.dialog.pad.location'),
-                    landpad.locality),
+                    landpad.locality,),
                 RowItem.text(
                   context.translate('spacex.dialog.pad.state'),
                   landpad.region,
@@ -70,7 +69,7 @@ class LandpadPage extends StatelessWidget {
                 ),
                 Separator.divider(),
                 ExpandText(landpad.details)
-              ]),
+              ],),
             ),
           ),
         ],

@@ -1,9 +1,10 @@
+// ignore_for_file: avoid_dynamic_calls
+
+import 'package:cherry/models/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-
-import '../utils/index.dart';
-import 'index.dart';
 
 /// Specific details about an one-of-a-kink space payload.
 class Payload extends Equatable {

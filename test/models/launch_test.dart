@@ -870,7 +870,7 @@ void main() {
     test('correctly returns single core', () {
       expect(
         RocketDetails(
-                cores: const [Core(id: '1'), Core(id: '2'), Core(id: '3')])
+                cores: const [Core(id: '1'), Core(id: '2'), Core(id: '3')],)
             .getSingleCore,
         Core(id: '1'),
       );
@@ -930,7 +930,7 @@ void main() {
     test('correctly checks for dragon capsule', () {
       expect(
         RocketDetails(
-                payloads: const [Payload(id: '1', capsule: CapsuleDetails())])
+                payloads: const [Payload(id: '1', capsule: CapsuleDetails())],)
             .hasCapsule,
         true,
       );
@@ -943,7 +943,7 @@ void main() {
     test('correctly returns short tentative time', () {
       expect(
         RocketDetails(
-                cores: const [Core(id: '1'), Core(id: '2'), Core(id: '3')])
+                cores: const [Core(id: '1'), Core(id: '2'), Core(id: '3')],)
             .getCore('1'),
         Core(id: '1'),
       );

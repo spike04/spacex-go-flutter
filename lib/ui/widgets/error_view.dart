@@ -1,9 +1,8 @@
-import 'package:big_tip/big_tip.dart';
+import 'package:cherry/ui/widgets/big_tip.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_request_bloc/flutter_request_bloc.dart';
-
-import '../../utils/index.dart';
 
 /// Widget that tells the user that there's been an error in a network process.
 /// It allows the user to perform a reload action.
@@ -15,12 +14,12 @@ class ErrorView<C extends RequestCubit> extends StatelessWidget {
     return BigTip(
       subtitle: Text(
         context.translate('spacex.other.loading_error.message'),
-        style: Theme.of(context).textTheme.subtitle1,
+        style: Theme.of(context).textTheme.titleMedium,
       ),
       action: Text(
         context.translate('spacex.other.loading_error.reload'),
-        style: Theme.of(context).textTheme.subtitle1.copyWith(
-              color: Theme.of(context).accentColor,
+        style: Theme.of(context).textTheme.titleMedium.copyWith(
+              color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.bold,
             ),
       ),

@@ -1,10 +1,9 @@
+import 'package:cherry/models/index.dart';
+import 'package:cherry/ui/views/vehicles/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:row_collection/row_collection.dart';
-
-import '../../models/index.dart';
-import '../views/vehicles/index.dart';
-import 'index.dart';
 
 class VehicleCell extends StatelessWidget {
   final Vehicle vehicle;
@@ -28,6 +27,6 @@ class VehicleCell extends StatelessWidget {
         ),
       ),
       Separator.divider(indent: 72)
-    ]);
+    ],);
   }
 }

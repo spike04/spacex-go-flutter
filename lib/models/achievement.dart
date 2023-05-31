@@ -3,7 +3,10 @@ import 'package:intl/intl.dart';
 
 /// Auxiliary model to storage specific SpaceX's achievments.
 class Achievement extends Equatable {
-  final String id, name, details, url;
+  final String id;
+  final String name;
+  final String details;
+  final String url;
   final DateTime date;
 
   const Achievement({
@@ -19,6 +22,7 @@ class Achievement extends Equatable {
       id: json['id'],
       name: json['title'],
       details: json['details'],
+      // ignore: avoid_dynamic_calls
       url: json['links']['article'],
       date: DateTime.parse(json['event_date_utc']),
     );

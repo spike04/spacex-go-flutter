@@ -1,5 +1,10 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/models/index.dart';
+import 'package:cherry/ui/views/launches/index.dart';
+import 'package:cherry/ui/views/vehicles/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +13,6 @@ import 'package:row_collection/row_collection.dart';
 import 'package:row_item/row_item.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sliver_fab/sliver_fab.dart';
-
-import '../../../cubits/index.dart';
-import '../../../models/index.dart';
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
-import '../vehicles/index.dart';
-import 'index.dart';
 
 /// This view displays all information about a specific launch.
 class LaunchPage extends StatelessWidget {
@@ -26,44 +24,44 @@ class LaunchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _launch = context.watch<LaunchesCubit>().getLaunch(id);
+    final launch = context.watch<LaunchesCubit>().getLaunch(id);
     return Scaffold(
       body: SliverFab(
         expandedHeight: MediaQuery.of(context).size.height * 0.3,
-        floatingWidget: !_launch.tentativeTime
+        floatingWidget: !launch.tentativeTime
             ? SafeArea(
                 top: false,
                 bottom: false,
                 left: false,
-                child: _launch.hasVideo
+                child: launch.hasVideo
                     ? FloatingActionButton(
                         heroTag: null,
                         tooltip: context.translate(
                           'spacex.other.tooltip.watch_replay',
                         ),
-                        onPressed: () => context.openUrl(_launch.getVideo),
+                        onPressed: () => context.openUrl(launch.getVideo),
                         child: Icon(Icons.ondemand_video),
                       )
                     : FloatingActionButton(
                         heroTag: null,
-                        backgroundColor: Theme.of(context).accentColor,
+                        backgroundColor: Theme.of(context).colorScheme.secondary,
                         tooltip: context.translate(
                           'spacex.other.tooltip.add_event',
                         ),
                         onPressed: () async {
                           await Add2Calendar.addEvent2Cal(Event(
-                            title: _launch.name,
-                            description: _launch.details ??
+                            title: launch.name,
+                            description: launch.details ??
                                 context.translate(
                                   'spacex.launch.page.no_description',
                                 ),
-                            location: _launch.launchpad.name ??
+                            location: launch.launchpad.name ??
                                 context.translate('spacex.other.unknown'),
-                            startDate: _launch.localLaunchDate,
-                            endDate: _launch.localLaunchDate.add(
+                            startDate: launch.localLaunchDate,
+                            endDate: launch.localLaunchDate.add(
                               Duration(minutes: 30),
                             ),
-                          ));
+                          ),);
                         },
                         child: Icon(Icons.event),
                       ),
@@ -71,10 +69,10 @@ class LaunchPage extends StatelessWidget {
             : Separator.none(),
         slivers: <Widget>[
           SliverBar(
-            title: _launch.name,
+            title: launch.name,
             header: SwiperHeader(
-              list: _launch.hasPhotos
-                  ? _launch.photos
+              list: launch.hasPhotos
+                  ? launch.photos
                   : List.from(SpaceXPhotos.upcoming)
                 ..shuffle(),
             ),
@@ -83,15 +81,15 @@ class LaunchPage extends StatelessWidget {
                 icon: IconShadow(Icons.adaptive.share),
                 onPressed: () => Share.share(
                   context.translate(
-                    _launch.localLaunchDate.isAfter(DateTime.now())
+                    launch.localLaunchDate.isAfter(DateTime.now())
                         ? 'spacex.other.share.launch.future'
                         : 'spacex.other.share.launch.past',
                     parameters: {
-                      'number': _launch.flightNumber.toString(),
-                      'name': _launch.name,
-                      'launchpad': _launch.launchpad.name ??
+                      'number': launch.flightNumber.toString(),
+                      'name': launch.name,
+                      'launchpad': launch.launchpad.name ??
                           context.translate('spacex.other.unknown'),
-                      'date': _launch.getTentativeDate,
+                      'date': launch.getTentativeDate,
                       'details': Url.shareDetails
                     },
                   ),
@@ -103,11 +101,11 @@ class LaunchPage extends StatelessWidget {
               for (final url in Menu.launch)
                 PopupMenuItem(
                   value: url,
-                  enabled: _launch.isUrlEnabled(url),
+                  enabled: launch.isUrlEnabled(url),
                   child: Text(context.translate(url)),
                 )
             ],
-            onMenuItemSelected: (name) => context.openUrl(_launch.getUrl(name)),
+            onMenuItemSelected: (name) => context.openUrl(launch.getUrl(name)),
           ),
           SliverSafeArea(
             top: false,
@@ -116,7 +114,7 @@ class LaunchPage extends StatelessWidget {
                 _missionCard(context),
                 _firstStageCard(context),
                 _secondStageCard(context),
-              ]),
+              ],),
             ),
           ),
         ],
@@ -125,27 +123,27 @@ class LaunchPage extends StatelessWidget {
   }
 
   Widget _missionCard(BuildContext context) {
-    final _launch = context.watch<LaunchesCubit>().getLaunch(id);
+    final launch = context.watch<LaunchesCubit>().getLaunch(id);
     return CardCell.header(
       context,
       leading: AbsorbPointer(
-        absorbing: !_launch.hasPatch,
+        absorbing: !launch.hasPatch,
         child: ProfileImage.big(
-          _launch.patchUrl,
-          onTap: () => context.openUrl(_launch.patchUrl),
+          launch.patchUrl,
+          onTap: () => context.openUrl(launch.patchUrl),
         ),
       ),
-      title: _launch.name,
+      title: launch.name,
       subtitle: [
         ItemCell(
           icon: Icons.calendar_today,
-          text: _launch.getLaunchDate(context),
+          text: launch.getLaunchDate(context),
         ),
         ItemCell(
           icon: Icons.location_on,
-          text: _launch.launchpad.name ??
+          text: launch.launchpad.name ??
               context.translate('spacex.other.unknown'),
-          onTap: _launch.launchpad.name == null
+          onTap: launch.launchpad.name == null
               ? null
               : () => Navigator.pushNamed(
                     context,
@@ -154,28 +152,28 @@ class LaunchPage extends StatelessWidget {
                   ),
         ),
       ],
-      details: _launch.getDetails(context),
+      details: launch.getDetails(context),
     );
   }
 
   Widget _firstStageCard(BuildContext context) {
-    final _launch = context.watch<LaunchesCubit>().getLaunch(id);
+    final launch = context.watch<LaunchesCubit>().getLaunch(id);
     return CardCell.body(
       context,
       title: context.translate('spacex.launch.page.rocket.title'),
       child: RowLayout(children: <Widget>[
         RowTap(
           context.translate('spacex.launch.page.rocket.model'),
-          _launch.rocket.name,
+          launch.rocket.name,
           onTap: () => Navigator.pushNamed(
             context,
             VehiclePage.route,
             arguments: {
-              'id': _launch.rocket.id,
+              'id': launch.rocket.id,
             },
           ),
         ),
-        if (_launch.avoidedStaticFire)
+        if (launch.avoidedStaticFire)
           RowItem.boolean(
             context.translate('spacex.launch.page.rocket.static_fire_date'),
             false,
@@ -183,84 +181,84 @@ class LaunchPage extends StatelessWidget {
         else
           RowItem.text(
             context.translate('spacex.launch.page.rocket.static_fire_date'),
-            _launch.getStaticFireDate(context),
+            launch.getStaticFireDate(context),
           ),
         RowItem.text(
           context.translate('spacex.launch.page.rocket.launch_window'),
-          _launch.getLaunchWindow(context),
+          launch.getLaunchWindow(context),
         ),
-        if (!_launch.upcoming)
+        if (!launch.upcoming)
           RowItem.boolean(
             context.translate('spacex.launch.page.rocket.launch_success'),
-            _launch.success,
+            launch.success,
           ),
-        if (_launch.success == false) ...<Widget>[
+        if (launch.success == false) ...<Widget>[
           Separator.divider(),
           RowItem.text(
             context.translate('spacex.launch.page.rocket.failure.time'),
-            _launch.failure.getTime,
+            launch.failure.getTime,
           ),
           RowItem.text(
             context.translate('spacex.launch.page.rocket.failure.altitude'),
-            _launch.failure.getAltitude(context),
+            launch.failure.getAltitude(context),
           ),
-          ExpandText(_launch.failure.getReason)
+          ExpandText(launch.failure.getReason)
         ],
-        for (final core in _launch.rocket.cores)
+        for (final core in launch.rocket.cores)
           _getCores(
             context,
             core,
-            isUpcoming: _launch.upcoming,
+            isUpcoming: launch.upcoming,
           ),
-      ]),
+      ],),
     );
   }
 
   Widget _secondStageCard(BuildContext context) {
-    final _launch = context.watch<LaunchesCubit>().getLaunch(id);
-    final _fairings = _launch.rocket.fairings;
+    final launch = context.watch<LaunchesCubit>().getLaunch(id);
+    final fairings = launch.rocket.fairings;
 
     return CardCell.body(
       context,
       title: context.translate('spacex.launch.page.payload.title'),
       child: RowLayout(children: <Widget>[
-        if (_launch.rocket.hasFairings) ...<Widget>[
+        if (launch.rocket.hasFairings) ...<Widget>[
           RowItem.boolean(
             context.translate('spacex.launch.page.payload.fairings.reused'),
-            _fairings.reused,
+            fairings.reused,
           ),
-          if (_fairings.recoveryAttempt == true)
+          if (fairings.recoveryAttempt == true)
             RowItem.boolean(
               context.translate(
                 'spacex.launch.page.payload.fairings.recovery_success',
               ),
-              _fairings.recovered,
+              fairings.recovered,
             )
           else
             RowItem.boolean(
               context.translate(
                 'spacex.launch.page.payload.fairings.recovery_attempt',
               ),
-              _fairings.recoveryAttempt,
+              fairings.recoveryAttempt,
             ),
         ],
-        if (_fairings != null) Separator.divider(),
-        _getPayload(context, _launch.rocket.getSinglePayload),
-        if (_launch.rocket.hasMultiplePayload)
+        if (fairings != null) Separator.divider(),
+        _getPayload(context, launch.rocket.getSinglePayload),
+        if (launch.rocket.hasMultiplePayload)
           ExpandList(
             hint: context.translate('spacex.other.all_payload'),
             child: Column(children: <Widget>[
-              for (final payload in _launch.rocket.payloads.sublist(1)) ...[
+              for (final payload in launch.rocket.payloads.sublist(1)) ...[
                 Separator.divider(),
                 Separator.spacer(),
                 _getPayload(context, payload),
-                if (_launch.rocket.payloads.indexOf(payload) !=
-                    _launch.rocket.payloads.length - 1)
+                if (launch.rocket.payloads.indexOf(payload) !=
+                    launch.rocket.payloads.length - 1)
                   Separator.spacer(),
               ]
-            ]),
+            ],),
           )
-      ]),
+      ],),
     );
   }
 
@@ -321,9 +319,9 @@ class LaunchPage extends StatelessWidget {
               context.translate('spacex.launch.page.rocket.core.gridfins'),
               core.hasGridfins,
             ),
-          ]),
+          ],),
         ),
-    ]);
+    ],);
   }
 
   Widget _getPayload(BuildContext context, Payload payload) {
@@ -387,8 +385,8 @@ class LaunchPage extends StatelessWidget {
             context.translate('spacex.launch.page.payload.period'),
             payload.getPeriod(context),
           ),
-        ]),
+        ],),
       )
-    ]);
+    ],);
   }
 }

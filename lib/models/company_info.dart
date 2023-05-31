@@ -1,8 +1,9 @@
+// ignore_for_file: avoid_dynamic_calls
+
+import 'package:cherry/utils/index.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../utils/index.dart';
 
 /// General information about SpaceX's company data.
 /// Used in the 'Company' tab, under the SpaceX screen.

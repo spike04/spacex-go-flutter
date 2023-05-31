@@ -1,7 +1,8 @@
-import 'package:flutter_request_bloc/flutter_request_bloc.dart';
+// ignore_for_file: avoid_dynamic_calls
 
-import '../models/index.dart';
-import '../services/index.dart';
+import 'package:cherry/models/index.dart';
+import 'package:cherry/services/index.dart';
+import 'package:flutter_request_bloc/flutter_request_bloc.dart';
 
 /// Handles retrieve and transformation of [Vehicles] from the API.
 /// This includes:

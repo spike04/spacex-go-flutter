@@ -1,3 +1,7 @@
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/models/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/material.dart';
@@ -5,11 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:row_collection/row_collection.dart';
 import 'package:row_item/row_item.dart';
 import 'package:share_plus/share_plus.dart';
-
-import '../../../cubits/index.dart';
-import '../../../models/index.dart';
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
 
 /// This view all information about a Falcon rocket model. It displays RocketInfo's specs.
 class RocketPage extends StatelessWidget {
@@ -19,14 +18,14 @@ class RocketPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RocketVehicle _rocket = context.watch<VehiclesCubit>().getVehicle(id);
+    final RocketVehicle rocket = context.watch<VehiclesCubit>().getVehicle(id);
     return Scaffold(
       body: CustomScrollView(slivers: <Widget>[
         SliverBar(
-          title: _rocket.name,
+          title: rocket.name,
           header: SwiperHeader(
-            list: _rocket.photos,
-            builder: (_, index) => CacheImage(_rocket.getPhoto(index)),
+            list: rocket.photos,
+            builder: (_, index) => CacheImage(rocket.getPhoto(index)),
           ),
           actions: <Widget>[
             IconButton(
@@ -35,13 +34,13 @@ class RocketPage extends StatelessWidget {
                 context.translate(
                   'spacex.other.share.rocket',
                   parameters: {
-                    'name': _rocket.name,
-                    'height': _rocket.getHeight,
-                    'engines': _rocket.firstStage.engines.toString(),
-                    'type': _rocket.engine.getName,
-                    'thrust': _rocket.firstStage.getThrust,
-                    'payload': _rocket.payloadWeights[0].getMass,
-                    'orbit': _rocket.payloadWeights[0].name,
+                    'name': rocket.name,
+                    'height': rocket.getHeight,
+                    'engines': rocket.firstStage.engines.toString(),
+                    'type': rocket.engine.getName,
+                    'thrust': rocket.firstStage.getThrust,
+                    'payload': rocket.payloadWeights[0].getMass,
+                    'orbit': rocket.payloadWeights[0].name,
                     'details': Url.shareDetails
                   },
                 ),
@@ -56,7 +55,7 @@ class RocketPage extends StatelessWidget {
                 child: Text(context.translate(item)),
               )
           ],
-          onMenuItemSelected: (text) => context.openUrl(_rocket.url),
+          onMenuItemSelected: (text) => context.openUrl(rocket.url),
         ),
         SliverSafeArea(
           top: false,
@@ -67,43 +66,43 @@ class RocketPage extends StatelessWidget {
               _payloadsCard(context),
               _stages(context),
               _enginesCard(context),
-            ]),
+            ],),
           ),
         ),
-      ]),
+      ],),
     );
   }
 
   Widget _rocketCard(BuildContext context) {
-    final RocketVehicle _rocket = context.watch<VehiclesCubit>().getVehicle(id);
+    final RocketVehicle rocket = context.watch<VehiclesCubit>().getVehicle(id);
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.rocket.description.title'),
       child: RowLayout(children: <Widget>[
         RowItem.text(
           context.translate('spacex.vehicle.rocket.description.launch_maiden'),
-          _rocket.getFullFirstFlight,
+          rocket.getFullFirstFlight,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.description.launch_cost'),
-          _rocket.getLaunchCost,
+          rocket.getLaunchCost,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.description.success_rate'),
-          _rocket.getSuccessRate(context),
+          rocket.getSuccessRate(context),
         ),
         RowItem.boolean(
           context.translate('spacex.vehicle.rocket.description.active'),
-          _rocket.active,
+          rocket.active,
         ),
         Separator.divider(),
-        ExpandText(_rocket.description)
-      ]),
+        ExpandText(rocket.description)
+      ],),
     );
   }
 
   Widget _specsCard(BuildContext context) {
-    final RocketVehicle _rocket = context.watch<VehiclesCubit>().getVehicle(id);
+    final RocketVehicle rocket = context.watch<VehiclesCubit>().getVehicle(id);
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.rocket.specifications.title'),
@@ -111,42 +110,42 @@ class RocketPage extends StatelessWidget {
         RowItem.text(
           context
               .translate('spacex.vehicle.rocket.specifications.rocket_stages'),
-          _rocket.getStages(context),
+          rocket.getStages(context),
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.specifications.height'),
-          _rocket.getHeight,
+          rocket.getHeight,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.specifications.diameter'),
-          _rocket.getDiameter,
+          rocket.getDiameter,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.specifications.mass'),
-          _rocket.getMass(context),
+          rocket.getMass(context),
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.stage.fairing_height'),
-          _rocket.fairingHeight(context),
+          rocket.fairingHeight(context),
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.stage.fairing_diameter'),
-          _rocket.fairingDiameter(context),
+          rocket.fairingDiameter(context),
         ),
-      ]),
+      ],),
     );
   }
 
   Widget _payloadsCard(BuildContext context) {
-    final RocketVehicle _rocket = context.watch<VehiclesCubit>().getVehicle(id);
+    final RocketVehicle rocket = context.watch<VehiclesCubit>().getVehicle(id);
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.rocket.capability.title'),
       child: RowLayout(
         children: <Widget>[
-          for (final payloadWeight in _rocket.payloadWeights)
+          for (final payloadWeight in rocket.payloadWeights)
             RowItem.text(
               payloadWeight.name,
               payloadWeight.getMass,
@@ -157,50 +156,50 @@ class RocketPage extends StatelessWidget {
   }
 
   Widget _stages(BuildContext context) {
-    final RocketVehicle _rocket = context.watch<VehiclesCubit>().getVehicle(id);
+    final RocketVehicle rocket = context.watch<VehiclesCubit>().getVehicle(id);
     return CardCell.body(
       context,
       title: context.translate('spacex.vehicle.rocket.stage.title'),
       child: RowLayout(children: <Widget>[
         RowItem.text(
           context.translate('spacex.vehicle.rocket.stage.thrust_first_stage'),
-          _rocket.firstStage.getThrust,
+          rocket.firstStage.getThrust,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.stage.fuel_amount'),
-          _rocket.firstStage.getFuelAmount(context),
+          rocket.firstStage.getFuelAmount(context),
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.stage.engines'),
-          _rocket.firstStage.getEngines(context),
+          rocket.firstStage.getEngines(context),
         ),
         RowItem.boolean(
           context.translate('spacex.vehicle.rocket.stage.reusable'),
-          _rocket.firstStage.reusable,
+          rocket.firstStage.reusable,
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.stage.thrust_second_stage'),
-          _rocket.secondStage.getThrust,
+          rocket.secondStage.getThrust,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.stage.fuel_amount'),
-          _rocket.secondStage.getFuelAmount(context),
+          rocket.secondStage.getFuelAmount(context),
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.stage.engines'),
-          _rocket.secondStage.getEngines(context),
+          rocket.secondStage.getEngines(context),
         ),
         RowItem.boolean(
           context.translate('spacex.vehicle.rocket.stage.reusable'),
-          _rocket.secondStage.reusable,
+          rocket.secondStage.reusable,
         ),
-      ]),
+      ],),
     );
   }
 
   Widget _enginesCard(BuildContext context) {
-    final _engine =
+    final engine =
         (context.watch<VehiclesCubit>().getVehicle(id) as RocketVehicle).engine;
 
     return CardCell.body(
@@ -209,40 +208,40 @@ class RocketPage extends StatelessWidget {
       child: RowLayout(children: <Widget>[
         RowItem.text(
           context.translate('spacex.vehicle.rocket.engines.model'),
-          _engine.getName,
+          engine.getName,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.engines.thrust_weight'),
-          _engine.getThrustToWeight(context),
+          engine.getThrustToWeight(context),
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.engines.fuel'),
-          _engine.getFuel,
+          engine.getFuel,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.engines.oxidizer'),
-          _engine.getOxidizer,
+          engine.getOxidizer,
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.engines.thrust_sea'),
-          _engine.getThrustSea,
+          engine.getThrustSea,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.engines.thrust_vacuum'),
-          _engine.getThrustVacuum,
+          engine.getThrustVacuum,
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.engines.isp_sea'),
-          _engine.getIspSea,
+          engine.getIspSea,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.rocket.engines.isp_vacuum'),
-          _engine.getIspVacuum,
+          engine.getIspVacuum,
         ),
-      ]),
+      ],),
     );
   }
 }

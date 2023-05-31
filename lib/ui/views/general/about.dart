@@ -1,11 +1,10 @@
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:row_collection/row_collection.dart';
-
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
 
 /// Constant list of all translators
 const List<Map<String, String>> _translators = [
@@ -142,7 +141,7 @@ class _AboutScreenState extends State<AboutScreen> {
           onTap: () => context.openUrl(Url.apiSource),
         ),
         Separator.divider(indent: 72),
-      ]),
+      ],),
     );
   }
 }

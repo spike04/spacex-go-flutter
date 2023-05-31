@@ -1,7 +1,7 @@
+import 'package:cherry/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'colors.dart';
 
 /// Class that contains all the different styles of an app
 class Style {
@@ -16,32 +16,25 @@ class Style {
   /// Light style
   static final ThemeData light = ThemeData(
     brightness: Brightness.light,
-    appBarTheme: AppBarTheme(brightness: Brightness.dark),
-    colorScheme: ColorScheme.light().copyWith(
-      primary: lightAccentColor,
-      secondary: lightAccentColor,
-      onSecondary: Colors.white,
-    ),
+    appBarTheme: AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
     primaryColor: lightPrimaryColor,
-    accentColor: lightAccentColor,
     pageTransitionsTheme: _pageTransitionsTheme,
     textTheme: GoogleFonts.rubikTextTheme(ThemeData.light().textTheme),
     popupMenuTheme: PopupMenuThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6),
       ),
-    ),
+    ), colorScheme: ColorScheme.light().copyWith(
+      primary: lightAccentColor,
+      secondary: lightAccentColor,
+      onSecondary: Colors.white,
+    ).copyWith(secondary: lightAccentColor),
   );
 
   /// Dark style
   static final ThemeData dark = ThemeData(
     brightness: Brightness.dark,
-    colorScheme: ColorScheme.dark().copyWith(
-      primary: darkAccentColor,
-      secondary: darkAccentColor,
-    ),
     primaryColor: darkPrimaryColor,
-    accentColor: darkAccentColor,
     canvasColor: darkCanvasColor,
     scaffoldBackgroundColor: darkBackgroundColor,
     cardColor: darkCardColor,
@@ -53,18 +46,16 @@ class Style {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6),
       ),
-    ),
+    ), colorScheme: ColorScheme.dark().copyWith(
+      primary: darkAccentColor,
+      secondary: darkAccentColor,
+    ).copyWith(secondary: darkAccentColor),
   );
 
   /// Black style (OLED)
   static final ThemeData black = ThemeData(
     brightness: Brightness.dark,
-    colorScheme: ColorScheme.dark().copyWith(
-      primary: blackAccentColor,
-      secondary: blackAccentColor,
-    ),
     primaryColor: blackPrimaryColor,
-    accentColor: blackAccentColor,
     canvasColor: blackPrimaryColor,
     scaffoldBackgroundColor: blackPrimaryColor,
     cardColor: blackPrimaryColor,
@@ -77,6 +68,9 @@ class Style {
         borderRadius: BorderRadius.circular(6),
         side: BorderSide(color: darkDividerColor),
       ),
-    ),
+    ), colorScheme: ColorScheme.dark().copyWith(
+      primary: blackAccentColor,
+      secondary: blackAccentColor,
+    ).copyWith(secondary: blackAccentColor),
   );
 }

@@ -1,7 +1,6 @@
+import 'package:cherry/utils/index.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_request_bloc/flutter_request_bloc.dart';
-
-import '../utils/index.dart';
 
 /// Services that retrieves information about SpaceX's vehicles.
 class VehiclesService extends BaseService<Dio> {

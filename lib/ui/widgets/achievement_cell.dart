@@ -1,9 +1,8 @@
+import 'package:cherry/models/achievement.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:row_collection/row_collection.dart';
-
-import '../../models/achievement.dart';
-import '../../utils/index.dart';
 
 class AchievementCell extends StatelessWidget {
   final Achievement achievement;

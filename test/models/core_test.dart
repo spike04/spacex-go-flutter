@@ -152,7 +152,7 @@ void main() {
         Core(launches: const [
           LaunchDetails(),
           LaunchDetails(),
-        ]).getLaunches,
+        ],).getLaunches,
         '2',
       );
     });

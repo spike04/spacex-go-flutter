@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:cherry/services/index.dart';
 import 'package:cherry/utils/index.dart';
 import 'package:flutter_test/flutter_test.dart';

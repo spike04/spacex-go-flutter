@@ -1,11 +1,10 @@
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/ui/views/tabs/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_actions/quick_actions.dart';
-
-import '../../../cubits/index.dart';
-import '../../../utils/index.dart';
-import '../tabs/index.dart';
 
 /// This view holds all tabs & its models: home, vehicles, upcoming & latest launches, & company tabs.
 class StartScreen extends StatefulWidget {
@@ -86,11 +85,11 @@ class _StartScreenState extends State<StartScreen> {
         LaunchesTab(LaunchType.upcoming),
         LaunchesTab(LaunchType.latest),
         CompanyTab(),
-      ]),
+      ],),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).brightness == Brightness.light
             ? Theme.of(context).primaryColor
-            : Theme.of(context).accentColor,
+            : Theme.of(context).colorScheme.secondary,
         type: BottomNavigationBarType.fixed,
         onTap: (index) => _currentIndex != index
             ? setState(() => _currentIndex = index)
@@ -110,11 +109,11 @@ class _StartScreenState extends State<StartScreen> {
               height: 24,
               color: _currentIndex != 1
                   ? Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).textTheme.caption.color
+                      ? Theme.of(context).textTheme.bodySmall.color
                       : Colors.black26
                   : Theme.of(context).brightness == Brightness.light
                       ? Theme.of(context).primaryColor
-                      : Theme.of(context).accentColor,
+                      : Theme.of(context).colorScheme.secondary,
             ),
           ),
           BottomNavigationBarItem(

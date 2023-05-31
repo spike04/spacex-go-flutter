@@ -1,13 +1,16 @@
+// ignore_for_file: avoid_dynamic_calls
+
+import 'package:cherry/models/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
-import '../utils/index.dart';
-import 'index.dart';
-
 /// General information about a Dragon capsule.
 class DragonVehicle extends Vehicle {
-  final num crew, launchMass, returnMass;
+  final num crew;
+  final num launchMass;
+  final num returnMass;
   final List<Thruster> thrusters;
   final bool reusable;
 

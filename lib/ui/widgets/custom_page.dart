@@ -1,3 +1,4 @@
+import 'package:cherry/ui/widgets/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,8 +6,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_request_bloc/flutter_request_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:row_collection/row_collection.dart';
-
-import 'index.dart';
 
 typedef RequestListBuilderLoaded<T> = List<Widget> Function(
   BuildContext context,
@@ -18,7 +17,8 @@ typedef RequestListBuilderLoaded<T> = List<Widget> Function(
 /// Used when the desired page doesn't have slivers or reloading.
 class SimplePage extends StatelessWidget {
   final String title;
-  final Widget body, fab;
+  final Widget body;
+  final Widget fab;
   final List<Widget> actions;
 
   const SimplePage({
@@ -86,7 +86,8 @@ class RequestSimplePage<C extends RequestCubit, T> extends StatelessWidget {
 class SliverPage extends StatelessWidget {
   final String title;
   final Widget header;
-  final List<Widget> children, actions;
+  final List<Widget> children;
+  final List<Widget> actions;
   final Map<String, String> popupMenu;
   final ScrollController controller;
 

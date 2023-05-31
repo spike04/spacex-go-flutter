@@ -1,10 +1,9 @@
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:provider/provider.dart';
-
-import '../../cubits/index.dart';
-import '../../utils/index.dart';
 
 /// Used as a sliver header, in the [background] parameter.
 /// It allows the user to scroll through multiple shots.

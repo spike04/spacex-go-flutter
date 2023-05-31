@@ -1,3 +1,7 @@
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/models/index.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:cherry_components/cherry_components.dart';
 import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +11,6 @@ import 'package:row_item/row_item.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sliver_fab/sliver_fab.dart';
 
-import '../../../cubits/index.dart';
-import '../../../models/index.dart';
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
-
 /// Displays live information about Elon Musk's Tesla Roadster.
 class RoadsterPage extends StatelessWidget {
   final String id;
@@ -20,7 +19,7 @@ class RoadsterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RoadsterVehicle _roadster =
+    final RoadsterVehicle roadster =
         context.watch<VehiclesCubit>().getVehicle(id);
     return Scaffold(
       body: SliverFab(
@@ -31,17 +30,17 @@ class RoadsterPage extends StatelessWidget {
           child: FloatingActionButton(
             heroTag: null,
             tooltip: context.translate('spacex.other.tooltip.watch_replay'),
-            onPressed: () => context.openUrl(_roadster.url),
+            onPressed: () => context.openUrl(roadster.url),
             child: Icon(Icons.ondemand_video),
           ),
         ),
         expandedHeight: MediaQuery.of(context).size.height * 0.3,
         slivers: <Widget>[
           SliverBar(
-            title: _roadster.name,
+            title: roadster.name,
             header: SwiperHeader(
-              list: _roadster.photos,
-              builder: (_, index) => CacheImage(_roadster.getPhoto(index)),
+              list: roadster.photos,
+              builder: (_, index) => CacheImage(roadster.getPhoto(index)),
             ),
             actions: <Widget>[
               IconButton(
@@ -50,9 +49,9 @@ class RoadsterPage extends StatelessWidget {
                   context.translate(
                     'spacex.other.share.roadster',
                     parameters: {
-                      'date': _roadster.getLaunchDate(context),
-                      'speed': _roadster.getSpeed,
-                      'earth_distance': _roadster.getEarthDistance,
+                      'date': roadster.getLaunchDate(context),
+                      'speed': roadster.getSpeed,
+                      'earth_distance': roadster.getEarthDistance,
                       'details': Url.shareDetails
                     },
                   ),
@@ -67,7 +66,7 @@ class RoadsterPage extends StatelessWidget {
                   child: Text(context.translate(item)),
                 )
             ],
-            onMenuItemSelected: (text) => context.openUrl(_roadster.url),
+            onMenuItemSelected: (text) => context.openUrl(roadster.url),
           ),
           SliverSafeArea(
             top: false,
@@ -82,7 +81,7 @@ class RoadsterPage extends StatelessWidget {
                     'spacex.vehicle.roadster.data_updated',
                   ),
                 ),
-              ]),
+              ],),
             ),
           ),
         ],
@@ -91,7 +90,7 @@ class RoadsterPage extends StatelessWidget {
   }
 
   Widget _roadsterCard(BuildContext context) {
-    final RoadsterVehicle _roadster =
+    final RoadsterVehicle roadster =
         context.watch<VehiclesCubit>().getVehicle(id);
     return CardCell.body(
       context,
@@ -99,7 +98,7 @@ class RoadsterPage extends StatelessWidget {
       child: RowLayout(children: <Widget>[
         RowItem.text(
           context.translate('spacex.vehicle.roadster.description.launch_date'),
-          _roadster.getFullFirstFlight,
+          roadster.getFullFirstFlight,
         ),
         RowItem.text(
           context.translate(
@@ -108,13 +107,13 @@ class RoadsterPage extends StatelessWidget {
           'Falcon Heavy',
         ),
         Separator.divider(),
-        ExpandText(_roadster.description)
-      ]),
+        ExpandText(roadster.description)
+      ],),
     );
   }
 
   Widget _vehicleCard(BuildContext context) {
-    final RoadsterVehicle _roadster =
+    final RoadsterVehicle roadster =
         context.watch<VehiclesCubit>().getVehicle(id);
     return CardCell.body(
       context,
@@ -122,27 +121,27 @@ class RoadsterPage extends StatelessWidget {
       child: RowLayout(children: <Widget>[
         RowItem.text(
           context.translate('spacex.vehicle.roadster.vehicle.mass'),
-          _roadster.getMass(context),
+          roadster.getMass(context),
         ),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.vehicle.speed'),
-          _roadster.getSpeed,
+          roadster.getSpeed,
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.vehicle.distance_earth'),
-          _roadster.getEarthDistance,
+          roadster.getEarthDistance,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.vehicle.distance_mars'),
-          _roadster.getMarsDistance,
+          roadster.getMarsDistance,
         ),
-      ]),
+      ],),
     );
   }
 
   Widget _orbitCard(BuildContext context) {
-    final RoadsterVehicle _roadster =
+    final RoadsterVehicle roadster =
         context.watch<VehiclesCubit>().getVehicle(id);
     return CardCell.body(
       context,
@@ -150,31 +149,31 @@ class RoadsterPage extends StatelessWidget {
       child: RowLayout(children: <Widget>[
         RowItem.text(
           context.translate('spacex.vehicle.roadster.orbit.type'),
-          _roadster.getOrbit,
+          roadster.getOrbit,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.orbit.period'),
-          _roadster.getPeriod(context),
+          roadster.getPeriod(context),
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.orbit.inclination'),
-          _roadster.getInclination,
+          roadster.getInclination,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.orbit.longitude'),
-          _roadster.getLongitude,
+          roadster.getLongitude,
         ),
         Separator.divider(),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.orbit.apoapsis'),
-          _roadster.getApoapsis,
+          roadster.getApoapsis,
         ),
         RowItem.text(
           context.translate('spacex.vehicle.roadster.orbit.periapsis'),
-          _roadster.getPeriapsis,
+          roadster.getPeriapsis,
         ),
-      ]),
+      ],),
     );
   }
 }

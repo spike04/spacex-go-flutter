@@ -1,12 +1,11 @@
-import 'package:big_tip/big_tip.dart';
+import 'package:cherry/cubits/index.dart';
+import 'package:cherry/models/index.dart';
+import 'package:cherry/ui/widgets/big_tip.dart';
+import 'package:cherry/ui/widgets/index.dart';
+import 'package:cherry/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_request_bloc/flutter_request_bloc.dart';
 import 'package:search_page/search_page.dart';
-
-import '../../../cubits/index.dart';
-import '../../../models/index.dart';
-import '../../../utils/index.dart';
-import '../../widgets/index.dart';
 
 /// This tab holds information about all kind of SpaceX's vehicles,
 /// such as rockets, capsules, Tesla Roadster & ships.
@@ -51,7 +50,7 @@ class VehiclesTab extends StatelessWidget {
                   context.translate(
                     'spacex.vehicle.title',
                   ),
-                  style: Theme.of(context).textTheme.headline6.copyWith(
+                  style: Theme.of(context).textTheme.titleLarge.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
@@ -59,8 +58,8 @@ class VehiclesTab extends StatelessWidget {
                   context.translate(
                     'spacex.search.suggestion.vehicle',
                   ),
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
+                  style: Theme.of(context).textTheme.titleMedium.copyWith(
+                        color: Theme.of(context).textTheme.bodySmall.color,
                       ),
                 ),
                 child: Icon(Icons.search),
@@ -70,7 +69,7 @@ class VehiclesTab extends StatelessWidget {
                   context.translate(
                     'spacex.vehicle.title',
                   ),
-                  style: Theme.of(context).textTheme.headline6.copyWith(
+                  style: Theme.of(context).textTheme.titleLarge.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                 ),
@@ -78,8 +77,8 @@ class VehiclesTab extends StatelessWidget {
                   context.translate(
                     'spacex.search.failure',
                   ),
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                        color: Theme.of(context).textTheme.caption.color,
+                  style: Theme.of(context).textTheme.titleMedium.copyWith(
+                        color: Theme.of(context).textTheme.bodySmall.color,
                       ),
                 ),
                 child: Icon(Icons.sentiment_dissatisfied),

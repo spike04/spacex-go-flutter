@@ -24,7 +24,7 @@ void main() {
                 'Falcon 1 becomes the first privately developed liquid-fuel rocket to reach Earth orbit.',
             id: '5f6fb2cfdcfdf403df37971e',
             url:
-                'http://www.spacex.com/news/2013/02/11/flight-4-launch-update-0'),
+                'http://www.spacex.com/news/2013/02/11/flight-4-launch-update-0',),
       );
     });
 

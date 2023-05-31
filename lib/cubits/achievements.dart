@@ -1,7 +1,6 @@
+import 'package:cherry/models/index.dart';
+import 'package:cherry/repositories/index.dart';
 import 'package:flutter_request_bloc/flutter_request_bloc.dart';
-
-import '../models/index.dart';
-import '../repositories/index.dart';
 
 /// Cubit that holds a list of all achievements scored in SpaceX history.
 class AchievementsCubit

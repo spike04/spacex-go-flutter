@@ -3,8 +3,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 extension Translate on BuildContext {
   String translate(
-    final String key, {
-    final Map<String, String> parameters,
+    String key, {
+    Map<String, String> parameters,
   }) {
     try {
       return FlutterI18n.translate(

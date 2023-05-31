@@ -51,5 +51,9 @@
 	<string>Improve notifications and timezone calibration</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Improve notifications and timezone calibration</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

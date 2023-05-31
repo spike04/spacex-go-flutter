@@ -1,4 +1,4 @@
-import '../models/index.dart';
+import 'package:cherry/models/index.dart';
 
 /// Useful methods used for perform various tasks inside a list of `Launch` objects.
 class LaunchUtils {
